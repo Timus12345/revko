@@ -1,0 +1,170 @@
+1)
+using System;
+
+class Worker
+{
+    public string name { get; set; }
+    public string surname { get; set; }
+    public double rate { get; set; }
+    public int days { get; set; }
+
+    public Worker(string name, string surname, double rate, int days )
+    {
+        this.name = name;
+        this.surname = surname;
+        this.rate = rate;
+        this.days = days;
+    }
+    public double GetSalary()
+    {
+        return rate * days;
+    }
+}
+
+class Public
+{
+    static void Main()
+    {
+        Worker worker = new Worker("Rustam", "Revko", 9.1, 34);
+        
+        Console.WriteLine(worker.name);
+        Console.WriteLine(worker.surname);
+        Console.WriteLine(worker.rate);
+        Console.WriteLine(worker.days);
+
+        double salary = worker.GetSalary(); //Расчет зп
+        Console.WriteLine($"Зарплата: {salary}");
+    }
+}
+............................................................
+2)
+using System;
+
+class Worker
+{
+    private string name;
+    private string surname;
+    private double rate;
+    private int days;
+
+    public Worker(string name, string surname, double rate, int days )
+    {
+        this.name = name;
+        this.surname = surname;
+        this.rate = rate;
+        this.days = days;
+    }
+    public Worker()
+    {
+        this.name = null;
+        this.surname = null;
+        this.rate = 0;
+        this.days = 0;
+    }
+    public double GetSalary()
+    {
+        return rate * days;
+    }
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+    public string Surname
+    {
+        get { return surname; }
+        set { surname = value; }
+    }
+    public double Rate
+    {
+        get { return rate; }
+        set { rate = value; }
+    }
+    public int Days
+    {
+        get { return days; }
+        set {  days = value; }
+    }
+}
+class Public
+{
+    static void Main()
+    {
+        Worker worker = new Worker("Rustam", "Revko", 9.1, 34);
+        
+        
+        Console.WriteLine(worker.Name);
+        Console.WriteLine(worker.Surname);
+        Console.WriteLine(worker.Rate);
+        Console.WriteLine(worker.Days);
+
+        double salary = worker.GetSalary(); 
+        Console.WriteLine($"Зарплата: {salary}");
+    }
+}
+.............................................................
+3)
+using System;
+
+public class Calculation
+{
+    private string calculationLine;
+
+    public string CalculationLine
+    {
+        get { return calculationLine; }
+        set { calculationLine = value; }
+    }
+
+    public void SetLastSymbolCalculationLine(char symbol)
+    {
+        calculationLine += symbol;
+    }
+
+    public string GetCalculationLine()
+    {
+        return calculationLine;
+    }
+
+    public char GetLastSymbol()
+    {
+        if (!string.IsNullOrEmpty(calculationLine))
+        {
+            return calculationLine[calculationLine.Length - 1];
+        }
+        else
+        {
+            throw new Exception("Calculation line is empty.");
+        }
+    }
+
+    public void DeleteLastSymbol()
+    {
+        if (!string.IsNullOrEmpty(calculationLine))
+        {
+            calculationLine = calculationLine.Remove(calculationLine.Length - 1);
+        }
+        else
+        {
+            throw new Exception("Calculation line is already empty.");
+        }
+    }
+    static void Main()
+    {
+        Calculation calculation = new Calculation();
+
+        calculation.SetLastSymbolCalculationLine('6');
+        calculation.SetLastSymbolCalculationLine('-');
+        calculation.SetLastSymbolCalculationLine('9');
+
+        Console.WriteLine("Calculation Line: " + calculation.GetCalculationLine());
+        Console.WriteLine("Last Symbol: " + calculation.GetLastSymbol());
+
+        calculation.DeleteLastSymbol();
+
+        Console.WriteLine("Calculation Line after deletion: " + calculation.GetCalculationLine());
+
+        Console.ReadLine();
+    }
+}

@@ -1,0 +1,197 @@
+1)
+using System;
+
+class Student
+{
+    public string LastName { get; set; }
+    public string DateOfBirthday { get; set; }
+    public string GroupNumber { get; set; }
+    public int[] Performance { get; set; }
+
+    public Student(string lastName, string dateOfBirthday, string groupNumber, int[] performance)
+    {
+        LastName = lastName;
+        DateOfBirthday = dateOfBirthday;
+        GroupNumber = groupNumber;
+        Performance = performance;
+    }
+    public void Update(string lastName, string dateOfBirthday, string groupNumber, int[] performance)
+    {
+        LastName = lastName;
+        DateOfBirthday = dateOfBirthday;
+        GroupNumber = groupNumber;
+        Performance = performance;
+    }
+    
+    public void PrintInfo()
+    {
+        Console.WriteLine($"Фамилия: {LastName}");
+        Console.WriteLine($"Дата рождения: {DateOfBirthday}");
+        Console.WriteLine($"Номер группы: {GroupNumber}");
+        Console.WriteLine($"Успеваемость: {string.Join(",",Performance)}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите фамилию студента: ");
+        string lastName = Console.ReadLine();
+        Console.WriteLine("Введите дату рождения студента: ");
+        string dateOfBirthday = Console.ReadLine();
+
+        Student student1 = new Student(lastName, dateOfBirthday, "000", new int[] {4, 3, 4, 4, 5});
+
+        student1.Update("Ревко", "10.10.2005", "631", new int[] { 5, 4, 4, 5, 2 });
+
+        student1.PrintInfo();
+    }
+}
+..............................................................
+2)
+using System;
+
+class Train
+{
+    public string Name { get; set; }
+    public string DepatureStantion { get; set; }
+    public string ArrivalStation { get; set; }
+    public string DepartureTime { get; set; }
+
+    public Train(string name, string departureStantion, string arrivalStation, string departureTime)
+    {
+       Name = name;
+       DepatureStantion = departureStantion;
+       ArrivalStation = arrivalStation;
+       DepartureTime = departureTime;    
+    }
+
+    public void PrintInfo()
+    {
+        Console.WriteLine($"Поезд {Name}:");
+        Console.WriteLine($"Отправление: {DepatureStantion}");
+        Console.WriteLine($" Прибытие: {ArrivalStation}");
+        Console.WriteLine($" Время отправления: {DepartureTime}");
+    }
+    
+    class Program
+    {
+        static void Main()
+        {
+            Dictionary<string, Train> trains = new Dictionary<string, Train>
+            {
+                { "1", new Train("Express", "Tomsk", "Ulu-Jul", "17:40") },
+                { "2", new Train("Swift", "Ulu-Jul", "Tomsk", "3:50") }
+            };
+
+            Console.WriteLine("Введите номер поезда для получения информации: ");
+            string trainNumber = Console.ReadLine();
+
+            if ( trains.ContainsKey(trainNumber) ) 
+            {
+                Train selectedTrain = trains[trainNumber];
+                selectedTrain.PrintInfo();
+            }
+            else
+            {
+                Console.WriteLine("Поезд с указанным номером не найден.");
+            }
+        }
+    }
+..........................................................
+3)
+using System;
+
+public class Numbers
+{
+    private int number1;
+    private int number2;
+
+    public Numbers(int number1, int number2)
+    {
+        this.number1 = number1;
+        this.number2 = number2;
+    }
+    public void DisplayNumbers()
+    {
+        Console.WriteLine($"Number 1: {number1}");
+        Console.WriteLine($"Number 2: {number2}");
+    }
+    public void ChangeNumbers(int newNumber1, int newNumber2)
+    {
+        number1 = newNumber1;
+        number2 = newNumber2;
+    }
+    public int GetSum()
+    {
+        return number1 + number2;
+    }
+    public int GetMax()
+    {
+        return Math.Max(number1, number2);
+    }
+}
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Numbers number = new Numbers(5, 10);
+        number.DisplayNumbers();
+       
+        number.ChangeNumbers(15, 20); // Меняем числа
+        number.DisplayNumbers();
+
+        int sum = number.GetSum();
+        Console.WriteLine($"Sum: {sum}");
+
+        int max = number.GetMax();
+        Console.WriteLine($"Max: {max}");
+    }
+}
+.............................................................
+5)
+using System;
+
+public class Objects
+{
+    private string thing1;
+    private int thing2;
+    public Objects(string t1, int t2)
+    {
+        thing1 = t1;
+        thing2 = t2;
+    }
+
+    public Objects()
+    {
+        thing1 = "default thing1";
+        thing2 = 0;
+    }
+    ~Objects()
+    {
+        Console.WriteLine("Объект удален");
+    }
+
+    public void DisplayThings()
+    {
+        Console.WriteLine("Thing 1:" + thing1);
+        Console.WriteLine("Thing 2:" + thing2);
+    }
+
+}
+
+class Program
+{
+    static void Main()
+    {
+        Objects obj1 = new Objects("Value 1", 10);
+        obj1.DisplayThings();
+
+        Objects obj2 = new Objects();
+        obj2.DisplayThings();
+
+        Console.WriteLine("Программа кончилась");
+    }
+}
+................................................................

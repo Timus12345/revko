@@ -1,0 +1,103 @@
+//////////////////////////////////////////////////
+//FIRST
+using System;
+using System.Globalization;
+
+class Proga
+{
+    static int CountJewel(string J, string S)
+    {
+        int count = 0;
+
+        foreach(char c in S)
+        {
+            if (J.Contains(c))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    static void Main()
+    {
+        string J = "ab";
+        string S = "aabbccd";
+        
+        int result = (CountJewel(J, S));
+        Console.WriteLine(result);
+    }
+}
+/////////////////////////////////////////////////
+//SECOND
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public IList<IList<int>> CombinationSum(int[] candidates, int target)
+    {
+        IList<IList<int>> result = new List<IList<int>>();
+        List<int> currentCombination = new List<int>();
+        Array.Sort(candidates); 
+        FindCombinations(candidates, target, 0, currentCombination, result);
+        return result;
+    }
+
+    private void FindCombinations(int[] candidates, int target, int start, List<int> currentCombination, IList<IList<int>> result)
+    {
+        if (target == 0)
+        {
+            result.Add(new List<int>(currentCombination));
+            return;
+        }
+
+        for (int i = start; i < candidates.Length; i++)
+        {
+            if (candidates[i] > target)
+            {
+                break; // Если текущее число больше цели, нет смысла продолжать
+            }
+            if (i > start && candidates[i] == candidates[i - 1])
+            {
+                continue; // Пропускаем повторяющиеся числа
+            }
+            currentCombination.Add(candidates[i]);
+            FindCombinations(candidates, target - candidates[i], i + 1, currentCombination, result);
+            currentCombination.RemoveAt(currentCombination.Count - 1);
+        }
+    }
+    static void Main()
+    {
+        int[] candidates = { 2, 5, 2, 1, 2 };
+        int target = 5;
+
+        Solution solution = new Solution();
+        IList<IList<int>> combinations = solution.CombinationSum(candidates, target);
+
+        foreach (var combination in combinations)
+        {
+            Console.WriteLine(string.Join(", ", combination));
+        }
+    }
+}
+/////////////////////////////////////////////////
+//THIRD
+using System;
+
+class Proga
+{
+    static bool ContainsDuplicate(int[] nums)
+    {
+            return nums.Length != nums.Distinct().Count();
+    }
+    
+    static void Main()
+    {
+        int[] num1 = [ 1, 2, 3, 1 ];
+        Console.WriteLine(ContainsDuplicate(num1));
+
+        int[] num2 = [ 1, 2, 3, 4 ];
+        Console.WriteLine(ContainsDuplicate(num2));
+    }
+}
+//////////////////////////////////////////////////
